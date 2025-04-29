@@ -1,0 +1,15 @@
+## Now, this is how we create a metric with percentage in IBM Cognos. We use TOTAL because, like I said before, IBM Cognos has some specificities... in this case, it doesn't have a SUM operator. 
+
+TOTAL (
+    CASE
+        WHEN Ouvidoria_ACM_txt.Tipo_de_Atendimento = 'Outros'
+        THEN 1
+        ELSE 0
+    END
+) / TOTAL (
+    CASE
+        WHEN Ouvidoria_ACM_txt.Tipo_de_Atendimento <> 'Pato amarelo'
+        THEN 1
+        ELSE 0
+    END
+)
