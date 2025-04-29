@@ -1,0 +1,12 @@
+## Here we will see how to combinate results in IBM Cognos. Of course, it's a simple CASE WHEN, but when we talk about IBM Cognos, everything can be a little especific... In any case, I will register this here for my own information in the future. 
+
+CASE WHEN Ouvidoria_ACM_txt.Tempo_Resolução <> 'Prorrogada' AND Aproveitamento_Texto = '1ª Resposta Aproveitada'
+     THEN '1ª Resposta aproveitada e não Prorrogado'
+     WHEN Ouvidoria_ACM_txt.Tempo_Resolução = 'Prorrogada' AND Aproveitamento_Texto = '1ª Resposta Aproveitada'
+     THEN '1ª Resposta aproveitada, mas Prorrogado'
+     WHEN Ouvidoria_ACM_txt.Tempo_Resolução <> 'Prorrogada' AND Aproveitamento_Texto <> '1ª Resposta Aproveitada'
+     THEN '1ª Resposta não aproveitada, mas não Prorrogado'
+     WHEN Ouvidoria_ACM_txt.Tempo_Resolução = 'Prorrogada' AND Aproveitamento_Texto <> '1ª Resposta Aproveitada'
+     THEN '1ª Resposta não aproveitada e Prorrogado'
+     ELSE 'Erro'
+end 
