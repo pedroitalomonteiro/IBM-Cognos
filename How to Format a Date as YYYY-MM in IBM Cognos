@@ -16,13 +16,12 @@ How it works:
 3. CASE -> logic – Adds a leading zero for months with only one digit (e.g., converts '5' to '05').
 4. Concatenation – Joins the year and zero-padded month with a hyphen ('-'), forming the desired 'YYYY-MM' format.
 
- ✅ Example output:
+Example output:
 
 For the date 'May 5, 2025', the expression returns:
 
 ---
 2025-05
 ---
-![Date Filter on Cognos Dashboard](https://tse2.mm.bing.net/th?id=OIP.vSdMi6iaAcxMlrvA66eOAAHaC2&cb=iwp1&pid=Api)
 
 
