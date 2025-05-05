@@ -1,0 +1,28 @@
+If you need to convert a date field into a string formatted as `YYYY-MM` (e.g., `2025-05`) in IBM Cognos, you can use the following calculated field expression:
+
+_year([Data]) + '-' + 
+(
+  CASE 
+    WHEN (len(_month([Data])) = 2)
+      THEN _month([Data])
+    ELSE '0' + _month([Data])
+  END
+)
+
+How it works:
+
+1. _year(...) – Extracts the year (4 digits) from the date field.
+2. _month(...) – Extracts the numeric month (1 to 12).
+3. CASE -> logic – Adds a leading zero for months with only one digit (e.g., converts '5' to '05').
+4. Concatenation – Joins the year and zero-padded month with a hyphen ('-'), forming the desired 'YYYY-MM' format.
+
+ ✅ Example output:
+
+For the date 'May 5, 2025', the expression returns:
+
+---
+2025-05
+---
+![Date Filter on Cognos Dashboard](https://tse2.mm.bing.net/th?id=OIP.vSdMi6iaAcxMlrvA66eOAAHaC2&cb=iwp1&pid=Api)
+
+
