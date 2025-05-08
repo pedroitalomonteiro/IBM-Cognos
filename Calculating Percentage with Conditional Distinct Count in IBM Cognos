@@ -1,0 +1,68 @@
+This guide demonstrates how to calculate a percentage using conditional logic and 'count(distinct)' functions within the IBM Cognos environment.
+
+
+Objective: Calculate the percentage of unique cases where the field 'Field1' is equal to 'Condition1', in relation to the total number of distinct Document and status combinations.
+
+
+Formula
+---
+count(
+  distinct
+    (CASE
+     WHEN Field1 = 'Condition1'
+     THEN DocumentID + Field1
+     ELSE NULL 
+     END)
+)
+/
+count(
+  distinct
+    (concat(DocumentID; Field1))
+)
+
+
+---
+
+ Explanation
+
+* **Numerator**: Counts distinct values only when 'Field1' equals ''Condition1''. The concatenation ensures uniqueness at the Document and status level.
+
+* **Denominator**: Counts all distinct combinations of 'DocumentID' and 'Field1', representing the total population under analysis.
+
+* **Result**: The formula returns a decimal value between 0 and 1. Multiply by 100 to express the result as a percentage.
+
+
+
+ Percentage Formatting
+
+To display the result as a percentage:
+
+'''sql
+100 * (
+  count(
+    distinct
+      (CASE
+       WHEN Field1 = 'Condition1'
+       THEN DocumentID + Field1
+       ELSE NULL 
+       END)
+  )
+  /
+  count(
+    distinct
+      (concat(DocumentID; Field1))
+  )
+)
+'''
+
+---
+
+ Example
+
+If there are 150 unique records where 'Field1 = 'Condition1'', and a total of 1000 distinct Document-status combinations, the result will be:
+
+'''text
+15.0
+'''
+
+This represents 15 percent of relevant records over the total.
